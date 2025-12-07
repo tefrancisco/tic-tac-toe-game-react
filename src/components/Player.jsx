@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Player({ initialName, symbol }) {
+export default function Player({ initialName, symbol, isActive }) {
     // playerName state receives initialName prop as its default value
     const [ playerName, setPlayerName ] = useState(initialName)
     const [ isEditing, setIsEditing ] = useState(false);
@@ -32,9 +32,14 @@ export default function Player({ initialName, symbol }) {
 
 
     return (
-        <li>
+        <li className={isActive ? 'active' : undefined}>
             <span className="player">
-                {isEditing ? <input type="text" value={playerName} required onChange={handleChange}></input> : <span className='player-name'>{playerName}</span>}
+                
+                {isEditing ? 
+                <input type="text" value={playerName} required onChange={handleChange}></input> 
+                : 
+                <span className='player-name'>{playerName}</span>}
+
                 <span className="player-symbol">{symbol}</span>
             </span>
             {/* Pass the function as a value, so it won't execute automatically when the site loads */}
